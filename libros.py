@@ -69,11 +69,52 @@ class Libro:
             Libro.contTotal += 1
 
 
-class PEDIDOS(Libro):
+class pedidos(Libro):
     carrito = []
 
+    def __init__(self, titulo: str, categoria: str, autor: str, paginas=0, edicion=0, codigo=str):
+        super().__init__(
+            titulo, categoria, autor, paginas, edicion, codigo
+        )
 
-libro1 = Libro("Cenicienta", "Infantil", "Disney", 800, 1697, "i-001")
+    def agregandoACarrito(lista):
+        libroXraAgregar = input(
+            'Ingrese el titulo que quiere agregar a su carrito: ')
+        for instancia in lista:
+            if instancia.titulo == libroXraAgregar:
+                print(f'Hemos agregado el libro {libroXraAgregar}')
+                pedidos.carrito.append(instancia)
+                return print(f'Estos son los libros en su carrito: {pedidos.carrito}')
+        else:
+            print(
+                f'El titulo {libroXraAgregar} no se encuentra en nuestros registros')
+            pedidos.agregandoACarrito(lista)
+
+    def eliminandoDeCarrito():
+        libroXraEliminar = input(
+            'Ingrese el titulo que quiere eliminar de su carrito: ')
+        for instancia in pedidos.carrito:
+            if instancia.titulo == libroXraEliminar:
+                print(f'Hemos eliminado el libro {libroXraEliminar}')
+                pedidos.carrito.remove(instancia)
+                return print(f'Estos son los libros en su carrito: {pedidos.carrito}')
+        else:
+            print(
+                f'El titulo {libroXraEliminar} no se encuentra en nuestros registros')
+            pedidos.eliminandoDeCarrito()
+
+    def verTitulo(lista):
+        titulos = []
+        for instance in lista:
+            titulos.append(instance.titulo)
+        print(f'Los titulos de los libros en el carrito son: {titulos}')
+
+    def nuevoCarrito(nuevoCarrito):
+        nuevoCarrito = list()
+        print(f'Se creo un nuevo carrito')
+
+
+libro1 = pedidos("Cenicienta", "Infantil", "Disney", 800, 1697, "i-001")
 libro2 = Libro("Programando en Python", "Drama", "Gabba", 1800, 2022, "d-001")
 libro3 = Libro("Vistiendo a mi hijo de 2", "Drama",
                "Gabba", 51800, 2022, "d-002")
@@ -81,6 +122,7 @@ libro4 = Libro("Rambo", "Accion", "SS", 5100, 1986, "a-001")
 libro5 = Libro("Pinocho", "Infantil", "Disney", 5100, 1883, "i-002")
 
 
+'''------------------- PUNTO UNO ----------------------------
 Libro.busqueda(Libro.all)
 Libro.longitud(Libro.all)
 print(
@@ -111,3 +153,13 @@ print(
 print('---------------------------------------------------------------------------------------')
 print(
     f'Los libros en la categoria Accion son {Libro.catAccionC}: {Libro.catAccion}')
+    '''
+
+
+pedidos.agregandoACarrito(Libro.all)
+pedidos.agregandoACarrito(Libro.all)
+pedidos.agregandoACarrito(Libro.all)
+pedidos.eliminandoDeCarrito()
+pedidos.verTitulo(pedidos.carrito)
+pedidos.nuevoCarrito(nuevoCarrito='Uno')
+pedidos.nuevoCarrito(nuevoCarrito='Dos')
